@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="/static/css/cover.css" rel="stylesheet">
+
+    <title>Shirt and Color Detectetion</title>
+</head>
+
+<body class="text-light gradient-custom">
+    
+    <div class="container-fluid pt-4 pl-4 pb-3">
+        <div class="row font-light mx-5">
+            <div class="col-9 text-light">
+                <h2>Shirt And Shirt Color Detection System</h2>
+            </div>
+            <div class="col-3 mt-1">
+                <a href="{% url 'home' %}">
+                    <button type="button" class="btn btn-outline-light px-5 rounded-pill">Back to Home</button>
+                </a>
+            </div>
+        </div>
+    </div> 
+    <div class="container mt-2">
+        <div class="row text-light mt-4">
+            <ul>
+                <h4><li>Upload Image</li></h4>
+            </ul>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="mb-3 col-5">
+                    <label for="image1Input" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" name="photo" accept="image/*" required>
+                </div> 
+            </div>
+            <button type="submit" class="btn btn-outline-light px-5 rounded-pill">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

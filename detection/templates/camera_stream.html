@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="/static/css/cover.css" rel="stylesheet">
+
+    <title>Shirt and Color Detectetion</title>    {% csrf_token %}
+</head>
+
+<body class="text-dark gradient-custom">
+    
+    <div class="container-fluid pt-4 pl-4 pb-3">
+        <div class="row font-light mx-5">
+            <div class="col-9 text-light">
+                <h2>Shirt And Shirt Color Detection System</h2>
+            </div>
+            <div class="col-3 mt-1">
+                <a href="{% url 'home' %}">
+                    <button type="button" class="btn btn-outline-light px-5 rounded-pill">Back to Home</button>
+                </a>
+            </div>
+        </div>
+    </div> 
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-light">
+                <ul>
+                    <li> This model can detect 7 colors of shirts  (Black, Blue, Green, Grey, Pink, Red, and White)</li>
+                </ul>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-9">
+                <video id="cameraStream" autoplay></video>
+            </div>
+            <div class="col-3">
+                <button id="captureButton" class="btn btn-dark mt-5 rounded-pill px-5">Capture Image</button>
+                <canvas id="capturedCanvas" style="display: none;"></canvas>
+                <img id="capturedImage" style="display: none;">
+            </div>
+        </div>
+
+        
+    </div>
+    <script>
+        const videoElement = document.getElementById('cameraStream');
+        const captureButton = document.getElementById('captureButton');
+        const capturedCanvas = document.getElementById('capturedCanvas');
+        const capturedImage = document.getElementById('capturedImage');
+
+        let stream;
+
+        async function startCamera() {
+            stream = await navigator.mediaDevices.getUserMedia({
+                video: true
+            });
+            videoElement.srcObject = stream;
+        }
+
+        async function stopCamera() {
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+        }
+
+        startCamera();
+
+        captureButton.addEventListener('click', async() => {
+            capturedCanvas.width = videoElement.videoWidth;
+            capturedCanvas.height = videoElement.videoHeight;
+            capturedCanvas.getContext('2d').drawImage(videoElement, 0, 0);
+
+            const blobData = await new Promise(resolve => {
+                capturedCanvas.toBlob(resolve, 'image/png');
+            });
+
+            const formData = new FormData();
+            formData.append('captured_image', blobData, 'captured_image.png');
+
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const headers = new Headers({
+                'X-CSRFToken': csrfToken
+            });
+
+            const response = await fetch('/upload_captured/', {
+                method: 'POST',
+                body: formData,
+                headers: headers,
+            });
+
+            if (response.ok) {
+                console.log('Image captured and uploaded.');
+                // Stop the camera stream after capturing
+                stopCamera();
+
+                // Redirect to a new page with a parameter
+                window.location.href = '/detected_image/';
+            } else {
+                console.error('Failed to upload captured image.');
+            }
+        });
+    </script>
+</body>
+
+</html>

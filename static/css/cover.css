@@ -1,0 +1,232 @@
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+body {
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+  max-width: 60em;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.hovereffect {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+  background-color: aqua;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+
+.hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+  filter: grayscale(1) blur(3px);
+  -webkit-filter: grayscale(1) blur(3px);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.hovereffect h2 {
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 10px;
+  background: aqua;
+}
+
+.hovereffect a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  border: 1px solid #000000;
+  margin: 100px 0 0 0;
+  background-color:aqua;
+}
+
+.hovereffect a.info:hover {
+  box-shadow: 0 0 5px #000000;
+}
+
+.hovereffect a.info, .hovereffect h2 {
+  -webkit-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.hovereffect:hover a.info, .hovereffect:hover h2 {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+
+hr.new{
+  align-content: center;
+  border-top: 10px dotted aqua;
+  background: transparent;
+}
+/* preloader css */
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* special gradient dark/black and blue color */
+  background: linear-gradient(to right, #000000,  #0c0c2e, #1d1d75, #312eb9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#logo-container {
+  display: flex;
+  align-items: center;
+}
+
+#logo-left,
+#logo-right {
+  opacity: 0;
+}
+
+#logo-left {
+  animation: slideInLeft 1s ease-in-out forwards;
+}
+
+#logo-right {
+  animation: slideInRight 1s ease-in-out forwards;
+}
+
+#logo-right {
+  animation: slideInRight 1s ease-in-out forwards;
+  width: 450px; /* Adjust the width as needed */
+  height: 450px; /* Adjust the height as needed */
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#main-content {
+  display: none;
+}
+
+
+/*
+horizontal row
+*/
+
+hr.new{
+  align-content: center;
+  border-top: 10px dotted rgb(241, 6, 6);
+  background: transparent;
+}
+
+
+/*
+Login
+*/
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #6a11cb;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+
+
+
+
+

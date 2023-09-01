@@ -1,0 +1,6 @@
+Django
+torch
+numpy
+Pillow
+opencv-python
+ultralytics
